@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1404198786 source:/home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/readinput.cpp
+	"readinput.h"
+	<iomanip>
+	<iostream>
+	<sstream>
+	<cstdlib>
+
+1404269009 /home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/readinput.h
+	<string>
+	<fstream>
+	<map>
+	<complex>
+	"elements.h"
+
+1404270514 /home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/elements.h
+	<string>
+	<complex>
+	<map>
+	"constants.h"
+
+1404198321 source:/home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/elements.cpp
+	"elements.h"
+	"readinput.h"
+	"constants.h"
+	<cmath>
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	<map>
+
+1404309885 source:/home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/main.cpp
+	"readinput.h"
+	"elements.h"
+	"methods.h"
+	<cstdlib>
+	<iostream>
+
+1404268985 /home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/constants.h
+	<complex>
+
+1404267121 source:/home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/constants.cpp
+	"constants.h"
+	<iostream>
+	<iomanip>
+
+1404310008 /home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/methods.h
+	"constants.h"
+	"elements.h"
+
+1404309758 source:/home/tong/scripts/MyBucket/pelican/src/cpp/cb/pelican/methods.cpp
+	"methods.h"
+	<cmath>
+	<ctime>
+	<gsl/gsl_sf_bessel.h>
+	<gsl/gsl_rng.h>
+	<gsl/gsl_randist.h>
+

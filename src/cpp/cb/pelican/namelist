@@ -1,0 +1,24 @@
+## input parameters example
+
+# input seed field, [V/m]
+seedEx = (5e4,10)
+seedEy = (0,0)
+
+# undulator
+undulatorField  = 0.5
+undulatorPeriod = 0.03
+undulatorNstep  = 10
+undulatorNum    = 100
+
+# electron beam
+electronAvgBetaFunc   = 5
+electronCentralEnergy = 300
+electronEnergySpread  = 300e-4
+electronEmitnx        = 1e-6
+electronEmitny        = 1e-6
+electronPeakCurrent   = 300
+
+# FEL radiation
+FELwavelength = 330e-9
+
+
