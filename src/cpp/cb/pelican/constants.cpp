@@ -73,4 +73,7 @@ defaultParams::defaultParams() // default parameters
 
     // FEL radiation
     dparams.FELwavelength = 266e-9; // FEL wavelength, [m]
+
+    // control panel
+    dparams.npart = 10000; // particle number
 }

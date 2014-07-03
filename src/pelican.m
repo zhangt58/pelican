@@ -24,17 +24,19 @@ function [parout, fldout, pout, bfout] = pelican (parin, fldin, I0in, paramArray
 %     pout   = [pxout, pyout]    : output power, if isave = 1, zpos is 1st col
 % 	  bfout  = [bf(1)..bf(nharm)]: bunching factor,if isave = 1, zpos is 1st col
 %
-%   Program version number: 1.2
+%   Program version number: 1.3
 %   Author  : Tong Zhang <tzhang@sinap.ac.cn>
 %   Created : 21:12, Dec. 06, 2012 (1.0)
 %   Modified: 10:56, Dec. 08, 2012 (1.1)
 %   Modified: 22:14, Dec. 12, 2012 (1.2)
+%   Modified: 16:19, Jul. 03, 2014 (1.3)
 %   
 %   update log:
 %   1.0: complete main program of pelican
 %   1.1: output control flag, isave controls output gaincurve or not
 % 		 add bunching factor output, nharm input parameter
 %   1.2: include field error
+%   1.3: correct g0 as resonant energy
 
 %% constants
 c0  = 299792458.0;  % speed of light, [m/s]
@@ -47,8 +49,6 @@ ep0 = 8.8542e-12;   % vacuum permittivity, [Amp.sec/meter.volt]
 % read input parameters
 psi = parin(:,2); 	% phase
 gam = parin(:,1); 	% lorentz factor
-g0  = mean(gam);  	% central energy
-eta = gam/g0-1;   	% relative energy spread
 
 Ex  = fldin(1,1);   % input Ex field
 Ey  = fldin(1,2);   % input Ey field
@@ -74,11 +74,14 @@ j0    = I0./Ab;       	 % transverse current density, [Amp/m^2]
 ku    = 2*pi/lambdau;    % undulator wavenumber, [1/m]
 ws    = 2*pi*c0/lambdas; % FEL angular frequency, [1/m]
 ndelz = lambdau/nstep; 	 % integration step size, [m]
+totalstep = nstep*Nu; 	 % total integration step
+
+g0  = sqrt(lambdau/lambdas/2*(1+K0Array(1)^2/2));  	% resonant energy
+eta = gam/g0-1;   	% relative energy spread
+
 coef1 = e0/m0/c0/c0/g0;
 coef2 = u0*c0*c0/ws;
 coef3 = u0*c0/4/g0;
-totalstep = nstep*Nu; 	 % total integration step
-
 
 if strcmp(iutype,'planar') % generate undulator parameter values for all integration steps
     K0 = K0Array(1);

@@ -44,9 +44,9 @@ void seedfield::info()
     std::cout << std::left;
     std::cout << "-------------------------------\n";
     std::cout << "seedfield:\n";
-    std::cout << std::setw(16) << "Ex: "   << std::setw(10) << Ex << "[T/m]\n";
+    std::cout << std::setw(16) << "Ex: "   << std::setw(10) << Ex << "[V/m]\n";
     std::cout << std::setw(16) << "Phix: " << std::setw(10) << atan(std::imag(Ex)/std::real(Ex)) << "[rad]\n";
-    std::cout << std::setw(16) << "Ey: "   << std::setw(10) << Ey << "[T/m]\n";
+    std::cout << std::setw(16) << "Ey: "   << std::setw(10) << Ey << "[V/m]\n";
     std::cout << std::setw(16) << "Phiy: " << std::setw(10) << atan(std::imag(Ey)/std::real(Ey)) << "[rad]\n";
     std::cout << "-------------------------------\n";
     std::cout << std::endl;
@@ -242,6 +242,36 @@ void FELradiation::info()
     std::cout << "-------------------------------\n";
     std::cout << "FEL radiation:\n";
     std::cout << std::setw(16) << "central wavelength: " << std::setw(10) << wavelength*1e9 << "[nm]\n";
+    std::cout << "-------------------------------\n";
+    std::cout << std::endl;
+}
+
+controlpanel::controlpanel()
+{
+    npart = dparams.npart;
+}
+
+controlpanel::controlpanel(std::map <std::string, std::string> &var)
+{
+    npart = atoi((var.find("cpnpart")->second).c_str());
+}
+
+void controlpanel::set_npart(unsigned int n)
+{
+    npart = n;
+}
+
+unsigned int controlpanel::get_npart()
+{
+    return npart;
+}
+
+void controlpanel::info()
+{
+    std::cout << std::left;
+    std::cout << "-------------------------------\n";
+    std::cout << "control parameters:\n";
+    std::cout << std::setw(16) << "particle number: " << std::setw(10) << npart << "\n";
     std::cout << "-------------------------------\n";
     std::cout << std::endl;
 }

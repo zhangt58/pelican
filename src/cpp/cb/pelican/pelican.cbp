@@ -33,6 +33,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add option="-lgsl -lgslcblas -lm" />
+		</Linker>
 		<Unit filename="constants.cpp" />
 		<Unit filename="constants.h" />
 		<Unit filename="elements.cpp" />

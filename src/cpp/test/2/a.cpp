@@ -52,3 +52,20 @@ double* normrand(int N, double mu, double sigma)
     return distnum;
 }
 
+double FELnumerical::fmean()
+{
+    cplxArr = new std::complex <double> [2];
+    std::complex <double> s(0,0);
+    std::complex <double> icplx(0,1);
+    for(int ii = 0; ii < 2; ii++)
+    {
+        //cplxArr[ii] = {(double)rand()/RAND_MAX,(double)rand()/RAND_MAX};
+        cplxArr[ii] = {(double)rand()/RAND_MAX,0};
+        s += exp(cplxArr[ii]*icplx);
+        std::cout << cplxArr[ii] << std::endl;
+        
+    }
+    //std::cout << s/10.0 << std::endl;
+    return abs(s/2.0);
+}
+

@@ -108,6 +108,21 @@ class FELradiation : public defaultParams
 
 };
 
-class
+class controlpanel : public defaultParams
+{
+    private:
+        unsigned int npart;
+
+    public:
+
+        controlpanel();
+        controlpanel(std::map <std::string, std::string> &var);
+
+        void set_npart(unsigned int n); // particle number
+
+        unsigned int get_npart();
+
+        void info();
+};
 
 #endif // ELEMENTS_H_

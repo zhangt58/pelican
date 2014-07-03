@@ -22,29 +22,33 @@ int main(int argc, char** argv)
     // store all (name,value) pairs into map variable: varlist
     getfield(infile, varlist);
     // show all the read parameters
-    printlist(varlist);
+    //printlist(varlist);
     infile.close();
 
     // set up elements with varlist,
     // or use the default parameters defined in class defaultParams in constants.{h,cpp}
-    /*
+/*
     // with default
     seedfield       seedfieldParams;
     undulator       undulatorParams;
     electronBeam electronBeamParams;
     FELradiation FELradiationParams;
-    */
+    controlpanel controlpanelParams;
+*/
+
     // with varlist
     seedfield       seedfieldParams(varlist);
     undulator       undulatorParams(varlist);
     electronBeam electronBeamParams(varlist);
     FELradiation FELradiationParams(varlist);
+    controlpanel controlpanelParams(varlist);
 
     // print information of each element
     seedfieldParams.info();
     undulatorParams.info();
     electronBeamParams.info();
     FELradiationParams.info();
+    controlpanelParams.info();
 
     // do FEL analytical calculation
     FELAnalysis FELAnalysisParams(undulatorParams, electronBeamParams, FELradiationParams);
@@ -61,16 +65,21 @@ int main(int argc, char** argv)
     cout << "Psat : " << Psat  << " GW" << endl;
 
     // do FEL numerical simulation
-    FELNumerical FELNumericalParams(undulatorParams, electronBeamParams, FELradiationParams);
-    cout << FELNumericalParams.get_npart() << endl;
-    FELNumericalParams.generateDistribution(-10, 10);
-    double *psiins = FELNumericalParams.get_psi();
-    double *gamins = FELNumericalParams.get_gam();
+    FELNumerical FELNumericalParams(seedfieldParams, undulatorParams, electronBeamParams, FELradiationParams, controlpanelParams);
+    FELNumericalParams.generateDistribution(-3.1415926, 3.1415926);
+    //double *psiins = FELNumericalParams.get_psi();
+    //double *gamins = FELNumericalParams.get_gam();
 
+    /* output psi-gam distribution
     ofstream ofid("tmp");
     for (int i = 0; i < FELNumericalParams.get_npart(); i++)
         ofid << psiins[i] << " " << gamins[i] << endl;
     ofid.close();
+    */
+
+    FELNumericalParams.initParams();
+    FELNumericalParams.FELsolverSingleFrequency1D();
+    FELNumericalParams.dumpResults();
+
     return 0;
 }
-

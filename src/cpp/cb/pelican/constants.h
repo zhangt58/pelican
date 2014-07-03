@@ -52,6 +52,9 @@ class defaultParams
             // FEL radiation
             double FELwavelength;
 
+            // control panel
+            unsigned int npart;
+
         } dparams;
 
     public:
