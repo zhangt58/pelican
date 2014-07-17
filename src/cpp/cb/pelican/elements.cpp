@@ -1,6 +1,7 @@
 #include "elements.h"
 #include "readinput.h"
 #include "constants.h"
+#include "methods.h"
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
@@ -248,7 +249,7 @@ void FELradiation::info()
 
 controlpanel::controlpanel()
 {
-    npart = dparams.npart;
+    npart = dparams.cpnpart;
 }
 
 controlpanel::controlpanel(std::map <std::string, std::string> &var)
@@ -275,3 +276,183 @@ void controlpanel::info()
     std::cout << "-------------------------------\n";
     std::cout << std::endl;
 }
+
+scanpanel::scanpanel()
+{
+    scanflag   = dparams.spsflag;
+    echoflag   = dparams.speflag;
+    paramName  = dparams.spparam;
+    objfunc    = dparams.spobjfunc;
+    vbegin     = dparams.spvbegin;
+    vend       = dparams.spvend;
+    vstep      = dparams.spvstep;
+
+    nscan     = (int)((vend-vbegin)/vstep)+1;
+    scancord1 = new double [nscan];
+    scancord2 = new double [nscan];
+}
+
+scanpanel::scanpanel(std::map <std::string, std::string> &var)
+{
+    scanflag  = atoi((var.find("spsflag"   )->second).c_str());
+    echoflag  = atoi((var.find("speflag" )->second).c_str());
+    vbegin    = atof((var.find("spvbegin" )->second).c_str());
+    vend      = atof((var.find("spvend"   )->second).c_str());
+    vstep     = atof((var.find("spvstep"  )->second).c_str());
+    paramName =      (var.find("spparam"  )->second).c_str();
+    objfunc   =      (var.find("spobjfunc")->second).c_str();
+
+    nscan     = (int)((vend-vbegin)/vstep)+1;
+    scancord1 = new double [nscan];
+    scancord2 = new double [nscan];
+}
+
+scanpanel::~scanpanel()
+{
+    delete[] scancord1;
+    delete[] scancord2;
+}
+
+int scanpanel::checkScanParamIsOK()
+{
+    int ifindscan = 0, ifindobje = 0;
+
+    for (std::vector <std::string> :: iterator it = oparams.allowedScanParams->begin();
+         it != oparams.allowedScanParams->end(); ++it)
+    {
+        if (paramName == *it)
+            ifindscan = 1;
+    }
+
+    for (std::vector <std::string> :: iterator it = oparams.allowedObjeParams->begin();
+         it != oparams.allowedObjeParams->end(); ++it)
+    {
+        if (objfunc == *it)
+            ifindobje = 1;
+    }
+
+    return (int)(ifindscan && ifindobje);
+}
+
+int scanpanel::checkScanSetupIsOK()
+{
+   if (checkScanParamIsOK() != 1)
+   {
+       std::cout << "Scan parameter name Error!" << std::endl;
+       exit(1);
+   }
+
+   if ((vbegin == vend) || ((vbegin < vend) && (vstep <= 0)) || ((vbegin > vend) && (vstep >= 0)))
+   {
+       std::cout << "Scan range setup Error!" << std::endl;
+       exit(1);
+   }
+
+   return 1; //!< scanpanel setup is OK, ready for scan
+}
+
+void scanpanel::updateVarlist(
+        std::map <std::string, std::string> &var,
+        double newvalue,
+        electronBeam &elecP,
+        seedfield    &seedP,
+        undulator    &unduP,
+        FELradiation &radiP)
+{
+    var.find(paramName)->second = dbl2str(newvalue);
+    set_electronBeam(elecP, var);
+    //set_seedfield   (seedP, var); // seedfield input value type: change complex into two double
+    set_undulator   (unduP, var);
+    set_FELradiation(radiP, var);
+}
+
+void scanpanel::set_electronBeam(electronBeam &elecP, std::map <std::string, std::string> &var)
+{
+    elecP.set_centralEnergy(atof((var.find("electronCentralEnergy")->second).c_str()));
+    elecP.set_energySpread (atof((var.find("electronEnergySpread" )->second).c_str()));
+    elecP.set_emitnx       (atof((var.find("electronEmitnx"       )->second).c_str()));
+    elecP.set_emitny       (atof((var.find("electronEmitny"       )->second).c_str()));
+    elecP.set_peakCurrent  (atof((var.find("electronPeakCurrent"  )->second).c_str()));
+    elecP.set_avgBetaFunc  (atof((var.find("electronAvgBetaFunc"  )->second).c_str()));
+}
+
+
+void scanpanel::set_seedfield(seedfield &seedP, std::map <std::string, std::string> &var)
+{
+//    seedP.set_Ex()
+}
+
+
+void scanpanel::set_undulator(undulator &unduP, std::map <std::string, std::string> &var)
+{
+    unduP.set_field (atof((var.find("undulatorField" )->second).c_str()));
+    unduP.set_period(atof((var.find("undulatorPeriod")->second).c_str()));
+    unduP.set_nstep (atof((var.find("undulatorNstep" )->second).c_str()));
+    unduP.set_num   (atof((var.find("undulatorNum"   )->second).c_str()));
+}
+
+void scanpanel::set_FELradiation(FELradiation &radiP, std::map <std::string, std::string> &var)
+{
+    radiP.set_wavelength(atof((var.find("FELwavelength")->second).c_str()));
+}
+
+void scanpanel::paramScan(std::map <std::string, std::string> &var,
+                          electronBeam &elecP,
+                          seedfield    &seedP,
+                          undulator    &unduP,
+                          FELradiation &radiP,
+                          controlpanel &cntlP)
+{
+    if (checkScanSetupIsOK()) //!< do scan, or not
+    {
+        int idx = 0;
+        for (double vscan = vbegin; vscan <= vend; vscan += vstep)
+        {
+            if (echoflag) //!< print scan information or not
+            {
+                std::cout << std::setw(10) << paramName << " = " << std::setw(10) << vscan << "\n";
+            }
+            scancord1[idx] = vscan;
+            updateVarlist(var, vscan, elecP, seedP, unduP, radiP);
+
+            FELNumerical tmpFELNum(seedP, unduP, elecP, radiP, cntlP);
+            tmpFELNum.generateDistribution(-3.1415926, 3.1415926);
+            tmpFELNum.initParams();
+            tmpFELNum.FELsolverSingleFrequency1D("RK4");
+
+            scancord2[idx] = abs(tmpFELNum.get_maxExAmp());
+            ++idx;
+        }
+    }
+}
+
+void scanpanel::dumpdata()
+{
+    std::ofstream out("tmpscan");
+    for(int i = 0; i < nscan; i++)
+    {
+        out << scancord1[i] << " " << scancord2[i] << std::endl;
+    }
+}
+
+void scanpanel::info()
+{
+    std::cout << std::left;
+    std::cout << "-------------------------------\n";
+    std::cout << "scanpanel:\n";
+    std::cout << std::setw(16) << "scanflag: "  << std::setw(10) << scanflag  << "\n";
+    std::cout << std::setw(16) << "echoflag: "  << std::setw(10) << echoflag  << "\n";
+    std::cout << std::setw(16) << "scanParam: " << std::setw(10) << paramName << "\n";
+    std::cout << std::setw(16) << "scanRange: " << std::setw(10) << dbl2str(vbegin) 
+                                                                    + ":" + dbl2str(vstep) 
+                                                                    + ":" + dbl2str(vend) << "\n";
+    std::cout << "-------------------------------\n";
+    std::cout << std::endl;
+}
+
+bool scanpanel::get_scanflag()
+{
+    return scanflag;
+}
+
+
