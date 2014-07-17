@@ -2,13 +2,13 @@
 #define CONSTANTS_H_
 #include <complex>
 
-/*************************************************************************\
+#include <vector>
+
+/** \brief define classes: physical constants and default input parameters.
  *
- * define classes: physical constants and default input parameters
- *
- * created time: Jul. 1st, 15:48, 2014
- * last updated: Jul. 1st, 15:48, 2014
-\*************************************************************************/
+ * created time: Jul. 1st,  15:48, 2014
+ * last updated: Jul. 17st, 20:06, 2014
+ */
 
 class physicalConstants
 {
@@ -23,25 +23,25 @@ class physicalConstants
 
     public:
         physicalConstants();
-        void info(); // show all the physical constants
+        void info(); //!< show all the physical constants
 };
 
 class defaultParams
 {
     protected:
-        // paramlist: structure of default input parameters list
+        //!< paramlist: structure of default input parameters list
         struct paramlist{
-            // seedfield
+            //!< seedfield
             std::string seedEx;
             std::string seedEy;
 
-            // undulator
+            //!< undulator
             double       undulatorField;
             double       undulatorPeriod;
             unsigned int undulatorNstep;
             unsigned int undulatorNum;
 
-            // electron beam
+            //!< electron beam
             double electronAvgBetaFunc;
             double electronCentralEnergy;
             double electronEnergySpread;
@@ -49,17 +49,28 @@ class defaultParams
             double electronEmitny;
             double electronPeakCurrent;
 
-            // FEL radiation
+            //!< FEL radiation
             double FELwavelength;
 
-            // control panel
-            unsigned int npart;
+            //!< control panel
+            unsigned int cpnpart;
 
+            //!< scan panel
+            bool spsflag, speflag;
+            std::string spparam, spobjfunc;
+            double spvbegin, spvend, spvstep;
         } dparams;
+
+        //!< other defined parameters
+        struct otherparams{
+            std::vector <std::string> *allowedScanParams; //!< allowed scan parameters
+            std::vector <std::string> *allowedObjeParams; //!< allowed objective parameters
+        } oparams;
 
     public:
         defaultParams();
+        //~defaultParams();
 };
 
 
-#endif // CONSTANTS_H_
+#endif //!< CONSTANTS_H_
