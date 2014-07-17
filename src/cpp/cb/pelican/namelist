@@ -8,7 +8,7 @@ seedEy = (0,0)
 undulatorField  = 0.42548
 undulatorPeriod = 0.025
 undulatorNstep  = 1
-undulatorNum    = 500
+undulatorNum    = 200
 
 # electron beam, prefix: electron
 electronAvgBetaFunc   = 6
@@ -24,4 +24,12 @@ FELwavelength = 265.85e-9
 # control panel, prefix: cp
 cpnpart = 10000
 
+# scan panel, prefix: sp
+spsflag   = 1
+speflag   = 1
+spobjfunc = "power"
+spparam   = "electronCentralEnergy"
+spvbegin  = 260
+spvend    = 270
+spvstep   = 0.5
 
