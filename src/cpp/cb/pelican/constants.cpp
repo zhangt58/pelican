@@ -54,8 +54,8 @@ physicalConstants::physicalConstants()
 defaultParams::defaultParams() //!< default parameters
 {
     //!< seedfield
-    dparams.seedEx = "(1e6,0)";     //!< electric field in x [T/m], double complex, (realpart, imagpart)
-    dparams.seedEy = "(0.001,0)";   //!< electric field in y [T/m], double complex, (realpart, imagpart)
+    dparams.seedEx = "(1e6,0)";     //!< electric field in x [V/m], double complex, (realpart, imagpart)
+    dparams.seedEy = "(0.001,0)";   //!< electric field in y [V/m], double complex, (realpart, imagpart)
 
     //!< undulator
     dparams.undulatorField  = 0.42548; //!< undulator peak field, [T]

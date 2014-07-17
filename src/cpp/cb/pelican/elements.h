@@ -22,8 +22,8 @@ class seedfield : public defaultParams
         seedfield();
         seedfield(std::map <std::string, std::string> &var);
 
-        void set_Ex (std::complex <double> x); //!< electric field in x, [T/m]
-        void set_Ey (std::complex <double> x); //!< electric field in y, [T/m]
+        void set_Ex (std::complex <double> x); //!< electric field in x, [V/m]
+        void set_Ey (std::complex <double> x); //!< electric field in y, [V/m]
 
         std::complex <double> get_Ex();
         std::complex <double> get_Ey();
