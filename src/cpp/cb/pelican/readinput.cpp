@@ -48,3 +48,11 @@ std::complex <double> str2cplx(std::string str)
     sstr >> dcplx;
     return dcplx;
 }
+
+std::string dbl2str(double x)
+{
+    std::stringstream sstr;
+    sstr << x;
+    return sstr.str();
+}
+
