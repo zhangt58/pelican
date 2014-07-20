@@ -87,17 +87,23 @@ defaultParams::defaultParams() //!< default parameters
     dparams.spvstep  = 0.1;                     //!< scan step value for param
 
     //!< other defined parameters
+/*
     std::string allowedScanParamsArr[] = {
         "electronCentralEnergy",
         "electronPeakCurrent"
     };
     std::string allowedObjeParamsArr[] = {
-        "power",
+       "power",
         "bunching"
     };
-    oparams.allowedScanParams = new std::vector <std::string> (allowedScanParamsArr, allowedScanParamsArr+sizeof(allowedScanParamsArr)/sizeof(allowedScanParamsArr[0]));
-    oparams.allowedObjeParams = new std::vector <std::string> (allowedObjeParamsArr, allowedObjeParamsArr+sizeof(allowedObjeParamsArr)/sizeof(allowedObjeParamsArr[0]));
+*/
+    //oparams.allowedScanParams = new std::vector <std::string> (allowedScanParamsArr, allowedScanParamsArr+sizeof(allowedScanParamsArr)/sizeof(allowedScanParamsArr[0]));
+    //oparams.allowedObjeParams = new std::vector <std::string> (allowedObjeParamsArr, allowedObjeParamsArr+sizeof(allowedObjeParamsArr)/sizeof(allowedObjeParamsArr[0]));
+    oparams.allowedScanParams.push_back("electronCentralEnergy");
+    oparams.allowedScanParams.push_back("electronPeakCurrent");
 
+    oparams.allowedObjeParams.push_back("power");
+    oparams.allowedObjeParams.push_back("bunching");
 }
 
 /*

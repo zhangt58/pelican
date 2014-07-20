@@ -63,8 +63,8 @@ class defaultParams
 
         //!< other defined parameters
         struct otherparams{
-            std::vector <std::string> *allowedScanParams; //!< allowed scan parameters
-            std::vector <std::string> *allowedObjeParams; //!< allowed objective parameters
+            std::vector <std::string> allowedScanParams; //!< allowed scan parameters
+            std::vector <std::string> allowedObjeParams; //!< allowed objective parameters
         } oparams;
 
     public:
