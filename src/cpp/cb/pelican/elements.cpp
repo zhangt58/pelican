@@ -317,15 +317,15 @@ int scanpanel::checkScanParamIsOK()
 {
     int ifindscan = 0, ifindobje = 0;
 
-    for (std::vector <std::string> :: iterator it = oparams.allowedScanParams->begin();
-         it != oparams.allowedScanParams->end(); ++it)
+    for (std::vector <std::string> :: iterator it = oparams.allowedScanParams.begin();
+         it != oparams.allowedScanParams.end(); ++it)
     {
         if (paramName == *it)
             ifindscan = 1;
     }
 
-    for (std::vector <std::string> :: iterator it = oparams.allowedObjeParams->begin();
-         it != oparams.allowedObjeParams->end(); ++it)
+    for (std::vector <std::string> :: iterator it = oparams.allowedObjeParams.begin();
+         it != oparams.allowedObjeParams.end(); ++it)
     {
         if (objfunc == *it)
             ifindobje = 1;
@@ -443,8 +443,8 @@ void scanpanel::info()
     std::cout << std::setw(16) << "scanflag: "  << std::setw(10) << scanflag  << "\n";
     std::cout << std::setw(16) << "echoflag: "  << std::setw(10) << echoflag  << "\n";
     std::cout << std::setw(16) << "scanParam: " << std::setw(10) << paramName << "\n";
-    std::cout << std::setw(16) << "scanRange: " << std::setw(10) << dbl2str(vbegin) 
-                                                                    + ":" + dbl2str(vstep) 
+    std::cout << std::setw(16) << "scanRange: " << std::setw(10) << dbl2str(vbegin)
+                                                                    + ":" + dbl2str(vstep)
                                                                     + ":" + dbl2str(vend) << "\n";
     std::cout << "-------------------------------\n";
     std::cout << std::endl;
