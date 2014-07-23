@@ -146,42 +146,42 @@ void FELNumerical::FELsolverSingleFrequency1D()
     double j1r, j1i; // j1r: real part of j1; j1i: imaginart part of j1
     double Exr, Exi; // Exr: real part of Ex; Exi: imaginart part of Ex
     
-//    double Eamp2;
+    double Eamp2; // max |E|^2
     
     maxExAmp2 = 0;
     maxEyAmp2 = 0;
 
-    switch (method)
+    double h  = ndelz;
+    double z0 = 0;
+
+    double k1, k2, k3 ,k4;      // gamma
+    double l1, l2, l3, l4;      // psi
+    double m1r, m2r, m3r, m4r;  // Ex real part
+    double m1i, m2i, m3i, m4i;  // Ex imag part
+
+    for(unsigned int intzstep = 0; intzstep < totalIntSteps; intzstep++)
     {
-        //!< RK4 by default
-        case RK4:
+        zposArr[intzstep] = z0;
+        ExArr  [intzstep] = Ex0;
+
+        Exr = Ex0.get_real();
+        Exi = Ex0.get_imag();
+
+        z0 += h;
+        j1r =  2*j0*meancosh(psi, npart);
+        j1i = -2*j0*meansinh(psi, npart);
+
+        m1r = odef3(j1r, intzstep); // real part
+        m1i = odef3(j1i, intzstep); // real part
+
+        m4r = m3r = m2r = m1r;
+        m4i = m3i = m2i = m1i;
+
+        for(unsigned int i = 0; i < npart; i++)
         {
-            double k1, k2, k3 ,k4;      // gamma
-            double l1, l2, l3, l4;      // psi
-            double m1r, m2r, m3r, m4r;  // Ex real part
-            double m1i, m2i, m3i, m4i;  // Ex imag part
-            double h  = ndelz;
-            double z0 = 0;
-
-            for(unsigned int intzstep = 0; intzstep < totalIntSteps; intzstep++)
+            switch (method)
             {
-                zposArr[intzstep] = z0;
-                ExArr  [intzstep] = Ex0;
-
-                Exr = Ex0.get_real();
-                Exi = Ex0.get_imag();
-
-                z0 += h;
-                j1r =  2*j0*meancosh(psi, npart);
-                j1i = -2*j0*meansinh(psi, npart);
-
-                m1r = odef3(j1r, intzstep); // real part
-                m1i = odef3(j1i, intzstep); // real part
-
-                m4r = m3r = m2r = m1r;
-                m4i = m3i = m2i = m1i;
-
-                for(unsigned int i = 0; i < npart; i++)
+                case RK4: //!< RK4
                 {
                     k1 = odef1(psi[i], Exr, Exi, j1r, j1i, intzstep);
                     l1 = odef2(gam[i]);
@@ -197,82 +197,18 @@ void FELNumerical::FELsolverSingleFrequency1D()
 
                     gam[i] += h*(k1+2.0*k2+2.0*k3+k4)/6.0;
                     psi[i] += h*(l1+2.0*l2+2.0*l3+l4)/6.0;
+                    break;
                 }
-                Exr += h*(m1r+2.0*m2r+2.0*m3r+m4r)/6.0;
-                Exi += h*(m1i+2.0*m2i+2.0*m3i+m4i)/6.0;
-                Ex0 = efield(Exr, Exi);
-//                if ((Eamp2 = Ex0.get_amplitude2()) > maxExAmp2) maxExAmp2 = Eamp2;
-            }
-            break;
-        }
-        //!< EU1
-        case EU1:
-        {
-            double k1;
-            double l1;
-            double m1r, m1i;
-            double h  = ndelz;
-            double z0 = 0;
-
-            for(unsigned int intzstep = 0; intzstep < totalIntSteps; intzstep++)
-            {
-                zposArr[intzstep] = z0;
-                ExArr  [intzstep] = Ex0;
-                
-                Exr = Ex0.get_real();
-                Exi = Ex0.get_imag();
-
-                z0 += h;
-                j1r =  2*j0*meancosh(psi, npart);
-                j1i = -2*j0*meansinh(psi, npart);
-
-                m1r = odef3(j1r, intzstep);
-                m1i = odef3(j1i, intzstep);
-
-                for(unsigned int i = 0; i < npart; i++)
+                case EU1: //!< EU1
                 {
                     k1 = odef1(psi[i], Exr, Exi, j1r, j1i, intzstep);
                     l1 = odef2(gam[i]);
 
                     gam[i] += h*k1;
                     psi[i] += h*l1;
+                    break;
                 }
-                Exr += h*m1r;
-                Exi += h*m1i;
-                Ex0 = efield(Exr, Exi);
-//                if ((Eamp2 = Ex0.get_amplitude2()) > maxExAmp2) maxExAmp2 = Eamp2;
-            }
-            break;
-        }
-        //!< EU2
-        case EU2:
-        {
-            double k1, k2;
-            double l1, l2;
-            double m1r, m2r;
-            double m1i, m2i;
-            double h  = ndelz;
-            double z0 = 0;
-
-            for(unsigned int intzstep = 0; intzstep < totalIntSteps; intzstep++)
-            {
-                zposArr[intzstep] = z0;
-                ExArr  [intzstep] = Ex0;
-
-                Exr = Ex0.get_real();
-                Exi = Ex0.get_real();
-
-                z0 += h;
-                j1r =  2*j0*meancosh(psi, npart);
-                j1i = -2*j0*meansinh(psi, npart);
-
-                m1r = odef3(j1r, intzstep);
-                m1i = odef3(j1i, intzstep);
-
-                m2r = m1r;
-                m2i = m1i;
-
-                for(unsigned int i = 0; i < npart; i++)
+                case EU2: //!< EU2
                 {
                     k1 = odef1(psi[i], Exr, Exi, j1r, j1i, intzstep);
                     l1 = odef2(gam[i]);
@@ -282,22 +218,31 @@ void FELNumerical::FELsolverSingleFrequency1D()
 
                     gam[i] += h*(k1+k2)/2.0;
                     psi[i] += h*(l1+l2)/2.0;
+                    break;
                 }
-                Exr += h*(m1r+m2r)/2.0;
-                Exi += h*(m1i+m2i)/2.0;
-                Ex0 = efield(Exr, Exi);
-//                if ((Eamp2 = Ex0.get_amplitude2()) > maxExAmp2) maxExAmp2 = Eamp2;
+                default: //!< other cases
+                {
+                    std::cout << "Please define correct method (EU1|EU2|RK4)." << std::endl;
+                    exit(1);
+                }
             }
-            break;
         }
-        //!< other cases
-        default:
-        {
-            std::cout << "Please define correct method (EU1|EU2|RK4)." << std::endl;
-            exit(1);
-        }
+        Exr += h*m1r;
+        Exi += h*m1i;
+        //RK4
+        //Exr += h*(m1r+2.0*m2r+2.0*m3r+m4r)/6.0;
+        //Exi += h*(m1i+2.0*m2i+2.0*m3i+m4i)/6.0;
+        //EU1
+        //Exr += h*m1r;
+        //Exi += h*m1i;
+        //EU2
+        //Exr += h*(m1r+m2r)/2.0;
+        //Exi += h*(m1i+m2i)/2.0;
+        Ex0 = efield(Exr, Exi);
+//        if ((Eamp2 = Ex0.get_amplitude2()) > maxExAmp2) maxExAmp2 = Eamp2;
     }
 }
+
 
 inline double FELNumerical::odef1(double psi1, double Exr, double Exi, double j1r, double j1i, unsigned int &idx)
 {
