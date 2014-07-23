@@ -88,9 +88,9 @@ int main(int argc, char **argv)
 
     FELNumericalParams.initParams();
     //!< FELNumericalParams.FELsolverSingleFrequency1D0();
-    FELNumericalParams.FELsolverSingleFrequency1D("EU1");
+    //!< FELNumericalParams.FELsolverSingleFrequency1D("EU1");
     //!< FELNumericalParams.FELsolverSingleFrequency1D("EU2");
-    //FELNumericalParams.FELsolverSingleFrequency1D("RK4");
+    FELNumericalParams.FELsolverSingleFrequency1D("RK4");
 
     FELNumericalParams.dumpResults();
 
