@@ -6,6 +6,7 @@
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
+#include <omp.h>
 
 FELAnalysis::FELAnalysis(undulator &unduP, electronBeam &elecP, FELradiation &radiP)
 {
@@ -79,13 +80,16 @@ FELNumerical::FELNumerical(seedfield &seedP, undulator &unduP, electronBeam &ele
     avgbeta = elecP.get_avgBetaFunc  ();
     lambdau = unduP.get_period       ();
     bfield  = unduP.get_field        ();
-    nstep   = unduP.get_nstep        ();
+    deltz   = unduP.get_deltz        ();
     num     = unduP.get_num          ();
     current = elecP.get_peakCurrent  ();
     lambdas = radiP.get_wavelength   ();
     npart   = contP.get_npart        ();
     method  = contP.get_method       ();
     outfile = contP.get_outfilename  ();
+    parfile = contP.get_parfilename  ();
+    parflag = contP.get_parflag      ();
+    pardelz = contP.get_pardelz      ();
 }
 
 FELNumerical::~FELNumerical()
@@ -122,8 +126,8 @@ void FELNumerical::initParams()
     coef1  = E0/M0/C0/C0;
     coef2  = mu0*C0*C0/omegas;
     coef3  = mu0*C0/4.0/gammar;
-    ndelz  = lambdau/nstep;                         // integration step size, [m]
-    totalIntSteps = (int) (nstep*num);                // total integration steps
+    ndelz  = lambdau*deltz;                         // integration step size, [m]
+    totalIntSteps = (int) (num/deltz);              // total integration steps
     K0Arr   = new double [totalIntSteps];
     JJArr   = new double [totalIntSteps];
     zposArr = new double [totalIntSteps];
@@ -146,7 +150,7 @@ void FELNumerical::FELsolverSingleFrequency1D()
     double j1r, j1i; // j1r: real part of j1; j1i: imaginart part of j1
     double Exr, Exi; // Exr: real part of Ex; Exi: imaginart part of Ex
     
-    double Eamp2; // max |E|^2
+//    double Eamp2; // max |E|^2
     
     maxExAmp2 = 0;
     maxEyAmp2 = 0;
@@ -156,8 +160,18 @@ void FELNumerical::FELsolverSingleFrequency1D()
 
     double k1, k2, k3 ,k4;      // gamma
     double l1, l2, l3, l4;      // psi
-    double m1r, m2r, m3r, m4r;  // Ex real part
-    double m1i, m2i, m3i, m4i;  // Ex imag part
+    double m1r, m2r, m3r;// m4r;  // Ex real part
+    double m1i, m2i, m3i;// m4i;  // Ex imag part
+
+    int poudelz;
+    if (pardelz == 0)
+    {
+        poudelz = totalIntSteps;
+    }
+    else
+    {
+        poudelz = (int)(pardelz/deltz);
+    }
 
     for(unsigned int intzstep = 0; intzstep < totalIntSteps; intzstep++)
     {
@@ -174,9 +188,12 @@ void FELNumerical::FELsolverSingleFrequency1D()
         m1r = odef3(j1r, intzstep); // real part
         m1i = odef3(j1i, intzstep); // real part
 
-        m4r = m3r = m2r = m1r;
-        m4i = m3i = m2i = m1i;
+        m3r = m2r = m1r;
+        m3i = m2i = m1i;
+        //m4r = m3r = m2r = m1r;
+        //m4i = m3i = m2i = m1i;
 
+        #pragma omp parallel for private(k1,k2,k3,k4,l1,l2,l3,l4)
         for(unsigned int i = 0; i < npart; i++)
         {
             switch (method)
@@ -240,6 +257,7 @@ void FELNumerical::FELsolverSingleFrequency1D()
         //Exi += h*(m1i+m2i)/2.0;
         Ex0 = efield(Exr, Exi);
 //        if ((Eamp2 = Ex0.get_amplitude2()) > maxExAmp2) maxExAmp2 = Eamp2;
+        if (parflag && ((intzstep+1) % poudelz == 0)) dumpParfile();
     }
 }
 
@@ -278,6 +296,25 @@ void FELNumerical::dumpResults()
     }
 }
 
+void FELNumerical::dumpParfile()
+{
+    std::ofstream sparout;
+    sparout.open(parfile.c_str(), std::ofstream::out | std::ofstream::app);
+    if (sparout.good())
+    {
+        for (unsigned int i = 0; i < npart; i++)
+        {
+            sparout << psi[i] << " " << gam[i] << std::endl;
+        }
+        sparout.close();
+    }
+    else
+    {
+        std::cout << parfile << " write ERROR!" << std::endl;
+        exit(1);
+    }
+}
+
 double* FELNumerical::get_psi()
 {
     return psi;
@@ -301,6 +338,16 @@ double FELNumerical::get_maxExAmp()
 double FELNumerical::get_maxEyAmp()
 {
     return sqrt(maxEyAmp2);
+}
+
+double FELNumerical::get_endExAmp()
+{
+    return ExArr[totalIntSteps-1].get_amplitude();
+}
+
+double FELNumerical::get_endEyAmp()
+{
+    return EyArr[totalIntSteps-1].get_amplitude();
 }
 
 // global functions

@@ -42,7 +42,9 @@ class FELNumerical : public physicalConstants
 {
     private:
         unsigned int npart, num;
-        double nstep;
+        int parflag; //!< if dump particle dist
+        int pardelz; //!< save particle dist every delz period
+        double deltz;
         double gamma0, sigmag0, emitn, avgbeta, lambdau, current, lambdas, bfield;
         efield seedEx, seedEy;
         double *psi, *gam;  //!< longitudinal phase space, phase [rad] and energy [gamma]
@@ -51,8 +53,9 @@ class FELNumerical : public physicalConstants
         efield *ExArr, *EyArr; //!< electric field in x and y, [v/m]
         double maxExAmp2, maxEyAmp2; // max |E(x,y)|^2
         intMethods method;
-        std::string outfile;
+        std::string outfile; //!< output file for calc results
         std::ofstream soutfile;
+        std::string parfile; //!< output file for particle dist
 
         //!< for numerical calculation initialization
         double coef1, coef2, coef3, gammar, omegas, au, ku, sigmax, j0, ndelz;
@@ -68,8 +71,10 @@ class FELNumerical : public physicalConstants
         unsigned int get_npart();
         double* get_psi();
         double* get_gam();
-        double get_maxExAmp();
-        double get_maxEyAmp();
+        double get_maxExAmp(); //!< get max Ex amplitude
+        double get_maxEyAmp(); //!< get max Ey amplitude
+        double get_endExAmp(); //!< get the last record of Ex amplitude
+        double get_endEyAmp(); //!< get the last record of Ey amplitude
 
         //!< generate initial electron longitudinal distribution
         void generateDistribution(double minpsi, double maxpsi);
@@ -89,6 +94,9 @@ class FELNumerical : public physicalConstants
 
         //!< dump numerical simulation results
         void dumpResults();
+
+        //!< dump particle distribution
+        void dumpParfile();
 };
 
 
