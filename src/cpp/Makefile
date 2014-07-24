@@ -1,25 +1,28 @@
-OPTFLAGS = -O2 -s
+OPTFLAGS = -O3 -openmp -xSSE4.2 
 PGFLAGS = 
 #-pg
-DEBUGFLAGS = 
-#-g
-COMMONFLAGS = -ansi -Wfatal-errors -Wall -Wconversion
+DEBUGFLAGS = -g
+COMMONFLAGS = 
+#-Wall
 CXXFLAGS = $(COMMONFLAGS) $(DEBUGFLAGS) $(OPTFLAGS) $(PGFLAGS)
-LINKFLAGS = -lgsl -lgslcblas -lm 
+LINKFLAGS = -lgsl -lgslcblas
 #-static
-All: pelican
-pelican: main.o readinput.o elements.o constants.o methods.o
-	g++ $(CXXFLAGS) main.o readinput.o elements.o constants.o methods.o -o pelican $(LINKFLAGS) 
+#-lm 
+CC = icpc
+EXEC = pelicani
+All: $(EXEC)
+$(EXEC): main.o readinput.o elements.o constants.o methods.o
+	$(CC) $(CXXFLAGS) main.o readinput.o elements.o constants.o methods.o -o $(EXEC) $(LINKFLAGS) 
 main.o: main.cpp readinput.h elements.h methods.h
-	g++ $(CXXFLAGS) -c main.cpp -o main.o
+	$(CC) $(CXXFLAGS) -c main.cpp -o main.o
 readinput.o: readinput.cpp readinput.h
-	g++ $(CXXFLAGS) -c readinput.cpp -o readinput.o
+	$(CC) $(CXXFLAGS) -c readinput.cpp -o readinput.o
 elements.o: elements.cpp elements.h constants.h
-	g++ $(CXXFLAGS) -c elements.cpp -o elements.o
+	$(CC) $(CXXFLAGS) -c elements.cpp -o elements.o
 constants.o: constants.cpp constants.h
-	g++ $(CXXFLAGS) -c constants.cpp -o constants.o
+	$(CC) $(CXXFLAGS) -c constants.cpp -o constants.o
 methods.o: methods.cpp methods.h constants.h elements.h
-	g++ $(CXXFLAGS) -c methods.cpp -o methods.o
+	$(CC) $(CXXFLAGS) -c methods.cpp -o methods.o
 
 .PHONY: clean
 clean:
