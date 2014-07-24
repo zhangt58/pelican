@@ -9,7 +9,7 @@ LINKFLAGS = -lgsl -lgslcblas
 #-static
 #-lm 
 CC = icpc
-EXEC = pelicani
+EXEC = pelican
 All: $(EXEC)
 $(EXEC): main.o readinput.o elements.o constants.o methods.o
 	$(CC) $(CXXFLAGS) main.o readinput.o elements.o constants.o methods.o -o $(EXEC) $(LINKFLAGS) 
