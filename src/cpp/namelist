@@ -6,27 +6,30 @@ seedEy = "0,0"
 
 # undulator, prefix: undulator
 undulatorField  = 0.42548
-undulatorPeriod = 0.025
-undulatorNstep  = 1
+undulatorPeriod = 0.025     # [m]
+undulatorDeltz  = 1         # [period]
 undulatorNum    = 500
 
 # electron beam, prefix: electron
-electronAvgBetaFunc   = 6
-electronCentralEnergy = 264.9
-electronEnergySpread  = 265e-4
-electronEmitnx        = 4e-6
-electronEmitny        = 4e-6
-electronPeakCurrent   = 300
+electronAvgBetaFunc   = 6       # [m]
+electronCentralEnergy = 264.9   # [MeV]
+electronEnergySpread  = 265e-4 
+electronEmitnx        = 4e-6    # [mm.mrad]
+electronEmitny        = 4e-6    # [mm.mrad]
+electronPeakCurrent   = 300     # [A]
 
 # FEL radiation, prefix: FEL
-FELwavelength = 265.85e-9
+FELwavelength = 265.85e-9       # [m]
 
 # control panel, prefix: cp
-cpnpart   = 80000
+cpnpart   = 10000
 cpmethod = "RK4"
 #cpmethod = "EU2"
-#cpmethod  = "EU1"
-cpoutfile = "pelican80k.out"
+#cpmethod = "EU1"
+cpoutfile = "pelican.out"
+cpparflag = 0 # dump particle dist flag, 1: enable, or 0
+cppardelz = 0 # dump every cpppardelz periods, 0: only dump last record
+cpparfile = "pelican.par"
 
 # scan panel, prefix: sp
 spsflag   = 0
@@ -35,6 +38,6 @@ spobjfunc = "power"
 spparam   = "electronCentralEnergy"
 spvbegin  = 260
 spvend    = 270
-spvstep   = 0.5
-spoutfile = "pelican.scan"
+spvstep   = 1
+spoutfile = "pelican.scn"
 
