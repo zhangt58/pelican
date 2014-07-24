@@ -55,7 +55,7 @@ undulator::undulator()
 {
     field  = dparams.undulatorField;
     period = dparams.undulatorPeriod;
-    nstep  = dparams.undulatorNstep;
+    deltz  = dparams.undulatorDeltz;
     num    = dparams.undulatorNum;
 }
 
@@ -63,7 +63,7 @@ undulator::undulator(std::map <std::string, std::string> &var)
 {
     field  = atof((var.find("undulatorField" )->second).c_str());
     period = atof((var.find("undulatorPeriod")->second).c_str());
-    nstep  = atof((var.find("undulatorNstep" )->second).c_str());
+    deltz  = atof((var.find("undulatorDeltz" )->second).c_str());
     num    = atoi((var.find("undulatorNum"   )->second).c_str());
 }
 
@@ -82,9 +82,9 @@ void undulator::set_num(unsigned int n)
     num = n;
 }
 
-void undulator::set_nstep(double x)
+void undulator::set_deltz(double x)
 {
-    nstep = x;
+    deltz = x;
 }
 
 double undulator::get_field()
@@ -102,9 +102,9 @@ unsigned int undulator::get_num()
     return num;
 }
 
-double undulator::get_nstep()
+double undulator::get_deltz()
 {
-    return nstep;
+    return deltz;
 }
 
 void undulator::info()
@@ -115,7 +115,7 @@ void undulator::info()
     std::cout << std::setw(16) << "Period length: "   << std::setw(10) << period << "[m]\n";
     std::cout << std::setw(16) << "Period number: "   << std::setw(10) << num << "\n";
     std::cout << std::setw(16) << "Field: " << std::setw(10) << field << "[T]\n";
-    std::cout << std::setw(16) << "nstep: " << std::setw(10) << nstep << "\n";
+    std::cout << std::setw(16) << "deltz: " << std::setw(10) << deltz << "\n";
     std::cout << "-------------------------------\n";
     std::cout << std::endl;
 }
@@ -250,6 +250,9 @@ controlpanel::controlpanel()
     npart       = dparams.cpnpart;
     method      = dparams.cpmethod; 
     outfilename = dparams.cpoutfile;
+    parfilename = dparams.cpparfile;
+    parflag     = dparams.cpparflag;
+    pardelz     = dparams.cppardelz;
 }
 
 controlpanel::controlpanel(std::map <std::string, std::string> &var)
@@ -257,7 +260,9 @@ controlpanel::controlpanel(std::map <std::string, std::string> &var)
     npart        = atoi((var.find("cpnpart" )->second).c_str());
     method       = str2enum((var.find("cpmethod")->second));
     outfilename  = var.find("cpoutfile")->second;
-      
+    parfilename  = var.find("cpparfile")->second;
+    parflag      = atoi((var.find("cpparflag")->second).c_str());
+    pardelz      = atoi((var.find("cppardelz")->second).c_str());
 }
 
 void controlpanel::set_npart(unsigned int n)
@@ -275,6 +280,21 @@ void controlpanel::set_outfilename(std::string str)
     outfilename = str;
 }
 
+void controlpanel::set_parfilename(std::string str)
+{
+    parfilename = str;
+}
+
+void controlpanel::set_parflag(int n)
+{
+    parflag = n;
+}
+
+void controlpanel::set_pardelz(int n)
+{
+    pardelz = n;
+}
+
 unsigned int controlpanel::get_npart()
 {
     return npart;
@@ -290,7 +310,22 @@ std::string controlpanel::get_outfilename()
     return outfilename;
 }
 
-void controlpanel::info()
+std::string controlpanel::get_parfilename()
+{
+    return parfilename;
+}
+
+int controlpanel::get_parflag()
+{
+    return parflag;
+}
+
+int controlpanel::get_pardelz()
+{
+    return pardelz;
+}
+
+void controlpanel::info() //to be completed
 {
     std::cout << std::left;
     std::cout << "-------------------------------\n";
@@ -319,8 +354,8 @@ scanpanel::scanpanel()
 
 scanpanel::scanpanel(std::map <std::string, std::string> &var)
 {
-    scanflag  = atoi((var.find("spsflag"   )->second).c_str());
-    echoflag  = atoi((var.find("speflag" )->second).c_str());
+    scanflag  = atoi((var.find("spsflag"  )->second).c_str());
+    echoflag  = atoi((var.find("speflag"  )->second).c_str());
     vbegin    = atof((var.find("spvbegin" )->second).c_str());
     vend      = atof((var.find("spvend"   )->second).c_str());
     vstep     = atof((var.find("spvstep"  )->second).c_str());
@@ -413,7 +448,7 @@ void scanpanel::set_undulator(undulator &unduP, std::map <std::string, std::stri
 {
     unduP.set_field (atof((var.find("undulatorField" )->second).c_str()));
     unduP.set_period(atof((var.find("undulatorPeriod")->second).c_str()));
-    unduP.set_nstep (atof((var.find("undulatorNstep" )->second).c_str()));
+    unduP.set_deltz (atof((var.find("undulatorDeltz" )->second).c_str()));
     unduP.set_num   (atoi((var.find("undulatorNum"   )->second).c_str()));
 }
 
@@ -446,7 +481,8 @@ void scanpanel::paramScan(std::map <std::string, std::string> &var,
             tmpFELNum.initParams();
             tmpFELNum.FELsolverSingleFrequency1D();
 
-            scancord2[idx] = tmpFELNum.get_maxExAmp();
+            //scancord2[idx] = tmpFELNum.get_maxExAmp();
+            scancord2[idx] = tmpFELNum.get_endExAmp();
             ++idx;
         }
     }

@@ -35,7 +35,7 @@ class undulator : public defaultParams
     private:
         double period, field;
         unsigned int num;
-        double nstep;
+        double deltz;
 
     public:
 
@@ -45,12 +45,12 @@ class undulator : public defaultParams
         void set_period(double x);       //!< period length, [m]
         void set_field (double x);       //!< peak magnetic field, [T]
         void set_num   (unsigned int n); //!< total period number
-        void set_nstep (double x);       //!< integration steps per period
+        void set_deltz (double x);       //!< integration length in period
 
         double get_field ();
         double get_period();
-        unsigned int get_num  ();
-        double get_nstep();
+        unsigned int get_num();
+        double get_deltz();
 
         void info(); //!< show all parameters
 
@@ -112,6 +112,9 @@ class controlpanel : public defaultParams
         unsigned int npart;
         intMethods method;
         std::string outfilename;
+        std::string parfilename;
+        int parflag;
+        int pardelz;
 
     public:
 
@@ -121,10 +124,16 @@ class controlpanel : public defaultParams
         void set_npart(unsigned int n); //!< particle number
         void set_method(intMethods flag); //!< integration method
         void set_outfilename(std::string str); //!< outputfile name
+        void set_parfilename(std::string str); //!< outputfile name for particle dist
+        void set_parflag(int n); //!< set flag, 1: dump, 0: not dump
+        void set_pardelz(int n); //!< dump particle dist every n periods
 
         unsigned int get_npart();
         intMethods get_method();
         std::string get_outfilename();
+        std::string get_parfilename();
+        int get_parflag();
+        int get_pardelz();
 
         void info();
 };
