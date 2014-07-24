@@ -62,7 +62,7 @@ defaultParams::defaultParams() //!< default parameters
     //!< undulator
     dparams.undulatorField  = 0.42548; //!< undulator peak field, [T]
     dparams.undulatorPeriod = 0.025;   //!< undulator period, [m]
-    dparams.undulatorNstep  = 1.0;     //!< integration steps per period
+    dparams.undulatorDeltz  = 1.0;     //!< integration length in period
     dparams.undulatorNum    = 200;     //!< total integrated undulator period
 
     //!< electron beam
@@ -79,7 +79,10 @@ defaultParams::defaultParams() //!< default parameters
     //!< control panel
     dparams.cpnpart  = 10000;               //!< particle number
     dparams.cpmethod = RK4;                 //!< integration method, RK4|EU1|EU2
-    dparams.cpoutfile = "pelican.out";       //!< pelican output file name
+    dparams.cpoutfile = "pelican.out";      //!< pelican output file name
+    dparams.cpparfile = "pelican.par";      //!< pelican output file name for particle dist
+    dparams.cpparflag = 0;                  //!< by default, do not dump particle dist
+    dparams.cppardelz = 0;                  //!< 0 means dump the last record particle dist, or dump every cppardelz period
 
     //!< scan panel
     dparams.spsflag  = 0;                       //!< scan flag, enable by none zero value
@@ -89,7 +92,7 @@ defaultParams::defaultParams() //!< default parameters
     dparams.spvbegin = 260;                     //!< scan begin value for param
     dparams.spvend   = 270;                     //!< scan end value for param
     dparams.spvstep  = 0.1;                     //!< scan step value for param
-    dparams.spoutfile= "pelican.scan";          //!< output file name for scan results
+    dparams.spoutfile= "pelican.scn";           //!< output file name for scan results
 
     //!< other defined parameters
 /*

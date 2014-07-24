@@ -49,7 +49,7 @@ class defaultParams
             //!< undulator
             double       undulatorField;
             double       undulatorPeriod;
-            double       undulatorNstep;
+            double       undulatorDeltz;
             unsigned int undulatorNum;
 
             //!< electron beam
@@ -67,6 +67,9 @@ class defaultParams
             unsigned int cpnpart;
             intMethods cpmethod;
             std::string cpoutfile;
+            std::string cpparfile;
+            int cpparflag;
+            int cppardelz;
 
             //!< scan panel
             bool spsflag, speflag;
