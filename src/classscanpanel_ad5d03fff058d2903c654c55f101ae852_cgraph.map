@@ -1,0 +1,34 @@
+<map id="scanpanel::paramScan" name="scanpanel::paramScan">
+<area shape="rect" id="node2" href="$classscanpanel.html#abcd398fda4ec23590821fb7fa391f8eb" title="check scan setup, return 1 if all the parameters are OK, or 0 and exit(1); " alt="" coords="213,212,432,239"/>
+<area shape="rect" id="node4" href="$classscanpanel.html#a1338695a9884249cea3397a4f75c4fe5" title="update varlist read from external namelist file " alt="" coords="240,364,405,391"/>
+<area shape="rect" id="node20" href="$class_f_e_l_numerical.html#a9cc9dab3886a4812336e4ca796c8259d" title="parameters initialization for numerical calculation " alt="" coords="208,465,437,492"/>
+<area shape="rect" id="node22" href="$class_f_e_l_numerical.html#af73b446c5426faf40905db128fc5c589" title="FELNumerical::initParams" alt="" coords="235,516,410,543"/>
+<area shape="rect" id="node23" href="$class_f_e_l_numerical.html#acf164cc84fbe47c386ec672d1a62d43e" title="functions defined for ODE solver " alt="" coords="219,661,427,702"/>
+<area shape="rect" id="node32" href="$class_f_e_l_numerical.html#a6f826e9f11871164430bfe54175e8c11" title="get the last record of Ex amplitude " alt="" coords="221,824,424,851"/>
+<area shape="rect" id="node3" href="$classscanpanel.html#af24e52f96205d0d15988bb13ba8427ff" title="check if scan parameter (string) setup is OK, return 1 if is OK, or 0; " alt="" coords="486,136,709,163"/>
+<area shape="rect" id="node5" href="$readinput_8cpp.html#aa8e009615e0c90278ea678ee0b8bbfc7" title="convert double into string " alt="" coords="567,187,628,213"/>
+<area shape="rect" id="node6" href="$classscanpanel.html#a892cbc5c1eeafa7be9d8ddecaee3d68e" title="scanpanel::set_electronBeam" alt="" coords="500,237,695,264"/>
+<area shape="rect" id="node13" href="$classscanpanel.html#a039ed64a56edba772f36f872d65c61d0" title="scanpanel::set_undulator" alt="" coords="514,364,681,391"/>
+<area shape="rect" id="node18" href="$classscanpanel.html#ae742a13334bed97f6e39d4dca1be16a1" title="scanpanel::set_FELradiation" alt="" coords="504,415,691,441"/>
+<area shape="rect" id="node7" href="$classelectron_beam.html#a787d3e61816281618f284ef3bb2e1ebb" title="beam energy, $$ " alt="" coords="777,5,951,46"/>
+<area shape="rect" id="node8" href="$classelectron_beam.html#a7e4cff020876ed5b43499b60ad1822cd" title="rms energy spread, $$ " alt="" coords="777,70,951,111"/>
+<area shape="rect" id="node9" href="$classelectron_beam.html#a9e750f50d228ef648b6b607afac44c77" title="normalized emittance in x " alt="" coords="777,136,951,163"/>
+<area shape="rect" id="node10" href="$classelectron_beam.html#aacb24d39f88c45a62e5fbd5516e43bfb" title="normalized emittance in y " alt="" coords="777,187,951,213"/>
+<area shape="rect" id="node11" href="$classelectron_beam.html#a1e6b08af9247eca49c00af3d3c57cd6f" title="peak current, [A] " alt="" coords="761,237,967,264"/>
+<area shape="rect" id="node12" href="$classelectron_beam.html#a3c9af6b4b9f079eb078200ac4c91812f" title="average beta function, [m] " alt="" coords="758,288,970,315"/>
+<area shape="rect" id="node14" href="$classundulator.html#a7a27a3ad42f9d826929d68e04105c7f1" title="peak magnetic field, [T] " alt="" coords="798,339,930,365"/>
+<area shape="rect" id="node15" href="$classundulator.html#a9e87429b74fd3e518da8b64ba7f5dc3e" title="period length, [m] " alt="" coords="793,389,935,416"/>
+<area shape="rect" id="node16" href="$classundulator.html#a90893590b2f8011304afed43c806e217" title="integration length in period " alt="" coords="796,440,932,467"/>
+<area shape="rect" id="node17" href="$classundulator.html#ab7da54eee638d6b1fbe9fba7abf68310" title="total period number " alt="" coords="797,491,931,517"/>
+<area shape="rect" id="node19" href="$class_f_e_lradiation.html#a05d0489861b497819884e81019c546ca" title="central wavelength, [m] " alt="" coords="767,541,961,568"/>
+<area shape="rect" id="node21" href="$methods_8cpp.html#a2096e6ed7535e8e7125cfb93687b8891" title="return &lt;cos(h*psi[])&gt; " alt="" coords="559,465,635,492"/>
+<area shape="rect" id="node24" href="$classefield.html#acd868760a36c819bdddeffc734ddd21d" title="efield::get_real" alt="" coords="544,516,651,543"/>
+<area shape="rect" id="node25" href="$classefield.html#a532bb6e564552fc3ddd046e591da4a5d" title="efield::get_imag" alt="" coords="540,567,655,593"/>
+<area shape="rect" id="node26" href="$methods_8cpp.html#a7ebc760ceffb733e04b5ad7cb8fa703a" title="return &lt;sin(h*psi[])&gt; " alt="" coords="556,617,639,644"/>
+<area shape="rect" id="node27" href="$methods_8cpp.html#a9d3b9594d8625cd4d4a7fcf738c2536d" title="METHODS_H_. " alt="" coords="558,668,637,695"/>
+<area shape="rect" id="node28" href="$class_f_e_l_numerical.html#a07004555a6d926435e5cfe81ea0fce7d" title="FELNumerical::odef3" alt="" coords="525,719,670,745"/>
+<area shape="rect" id="node29" href="$class_f_e_l_numerical.html#ac59b8fd8eb868f25b9e599ab2f99b01e" title="FELNumerical::odef1" alt="" coords="525,769,670,796"/>
+<area shape="rect" id="node30" href="$class_f_e_l_numerical.html#a50847862c4edf2851f4422eb3ff68dca" title="FELNumerical::odef2" alt="" coords="525,820,670,847"/>
+<area shape="rect" id="node31" href="$class_f_e_l_numerical.html#a9902301071874ffdd433d0f6b52fe711" title="import particle distribution " alt="" coords="506,871,689,897"/>
+<area shape="rect" id="node33" href="$classefield.html#a278694fcf6d0066dcc3ad781478c4490" title="efield::get_amplitude" alt="" coords="526,921,669,948"/>
+</map>

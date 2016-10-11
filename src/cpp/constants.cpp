@@ -81,7 +81,10 @@ defaultParams::defaultParams() //!< default parameters
     dparams.cpmethod = RK4;                 //!< integration method, RK4|EU1|EU2
     dparams.cpoutfile = "pelican.out";      //!< pelican output file name
     dparams.cpparfile = "pelican.par";      //!< pelican output file name for particle dist
+    dparams.cpdisfile = "pelican.dis";      //!< default particle dist file to be read into
     dparams.cpparflag = 0;                  //!< by default, do not dump particle dist
+    dparams.cpdisflag = 0;                  //!< by default, do not import particle dist from external file
+    dparams.cpanaflag = 0;                  //!< by default, do not show analytical calculation results, or enabled by 1
     dparams.cppardelz = 0;                  //!< 0 means dump the last record particle dist, or dump every cppardelz period
 
     //!< scan panel

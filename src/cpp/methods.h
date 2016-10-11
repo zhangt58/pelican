@@ -22,9 +22,6 @@
 
 class FELAnalysis : public physicalConstants
 {
-    private:
-        double gamma0, sigmag0, emitn, avgbeta, lambdau, current, lambdas, bfield;
-        double sigmax, au, b, JJ, rho1D, rho3D, Lg1D, Lg3D, etad, etae, etag, CapG, Psat;
     public:
         //!< class initialization to calculate all physics objectives:
         //!< 1D and 3D FEL parameters and gain length, saturation power, as well.
@@ -36,33 +33,13 @@ class FELAnalysis : public physicalConstants
         double get_FELgainlength1D();
         double get_FELgainlength3D();
         double get_FELsatpower    ();
+    private:
+        double gamma0, sigmag0, emitn, avgbeta, lambdau, current, lambdas, bfield;
+        double sigmax, au, rho1D, rho3D, Lg1D, Lg3D, Psat;
 };
 
 class FELNumerical : public physicalConstants
 {
-    private:
-        unsigned int npart, num;
-        int parflag; //!< if dump particle dist
-        int pardelz; //!< save particle dist every delz period
-        double deltz;
-        double gamma0, sigmag0, emitn, avgbeta, lambdau, current, lambdas, bfield;
-        efield seedEx, seedEy;
-        double *psi, *gam;  //!< longitudinal phase space, phase [rad] and energy [gamma]
-        double *zposArr;    //!< longitudinal undulator position, [m]
-        double *bfArr;      //!< bunching factor
-        efield *ExArr, *EyArr; //!< electric field in x and y, [v/m]
-        double maxExAmp2, maxEyAmp2; // max |E(x,y)|^2
-        intMethods method;
-        std::string outfile; //!< output file for calc results
-        std::ofstream soutfile;
-        std::string parfile; //!< output file for particle dist
-
-        //!< for numerical calculation initialization
-        double coef1, coef2, coef3, gammar, omegas, au, ku, sigmax, j0, ndelz;
-        unsigned int totalIntSteps;
-        double *K0Arr; //!< undulator parameter array, desinged for including errores
-        double *JJArr; //!< coupled bessel factor array according to K0Arr
-
     public:
         //!< class initialization with input parameters
         FELNumerical(seedfield &seedP, undulator &unduP, electronBeam &elecP, FELradiation &radiP, controlpanel &contP);
@@ -87,6 +64,9 @@ class FELNumerical : public physicalConstants
         //!< or define key word method as "EU1" or "EU2"
         void FELsolverSingleFrequency1D();
 
+        //!< do FEL simulation
+        void FELsimulation1D();
+
         //!< functions defined for ODE solver
         inline double odef1(double psi1, double Exr, double Exi, double j1r, double j1i, unsigned int &idx);
         inline double odef2(double gam1);
@@ -97,6 +77,34 @@ class FELNumerical : public physicalConstants
 
         //!< dump particle distribution
         void dumpParfile();
+        
+        //!< import particle distribution
+        void importDisfile();
+
+    private:
+        unsigned int npart, num;
+        int parflag; //!< if dump particle dist (1) or not (0, default)
+        int disflag; //!< if import particle dist (1) or not (0, default)
+        int pardelz; //!< save particle dist every delz period
+        double deltz;
+        double gamma0, sigmag0, emitn, avgbeta, lambdau, current, lambdas, bfield;
+        efield seedEx, seedEy;
+        double *psi, *gam;  //!< longitudinal phase space, phase [rad] and energy [gamma]
+        double *zposArr;    //!< longitudinal undulator position, [m]
+        double *bfArr;      //!< bunching factor
+        efield *ExArr, *EyArr; //!< electric field in x and y, [v/m]
+        double maxExAmp2, maxEyAmp2; // max |E(x,y)|^2
+        intMethods method;
+        std::string outfile; //!< output file for calc results
+        std::ofstream soutfile;
+        std::string parfile; //!< output file for particle dist
+        std::string disfile; //!< particle dist filename to be imported if defined
+
+        //!< for numerical calculation initialization
+        double coef1, coef2, coef3, gammar, omegas, au, ku, sigmax, j0, ndelz;
+        unsigned int totalIntSteps;
+        double *K0Arr; //!< undulator parameter array, desinged for including errores
+        double *JJArr; //!< coupled bessel factor array according to K0Arr
 };
 
 

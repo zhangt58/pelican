@@ -251,8 +251,11 @@ controlpanel::controlpanel()
     method      = dparams.cpmethod; 
     outfilename = dparams.cpoutfile;
     parfilename = dparams.cpparfile;
+    disfilename = dparams.cpdisfile;
     parflag     = dparams.cpparflag;
+    disflag     = dparams.cpdisflag;
     pardelz     = dparams.cppardelz;
+    anaflag     = dparams.cpanaflag;
 }
 
 controlpanel::controlpanel(std::map <std::string, std::string> &var)
@@ -261,8 +264,11 @@ controlpanel::controlpanel(std::map <std::string, std::string> &var)
     method       = str2enum((var.find("cpmethod")->second));
     outfilename  = var.find("cpoutfile")->second;
     parfilename  = var.find("cpparfile")->second;
+    disfilename  = var.find("cpdisfile")->second;
     parflag      = atoi((var.find("cpparflag")->second).c_str());
+    disflag      = atoi((var.find("cpdisflag")->second).c_str());
     pardelz      = atoi((var.find("cppardelz")->second).c_str());
+    anaflag      = atoi((var.find("cpanaflag")->second).c_str());
 }
 
 void controlpanel::set_npart(unsigned int n)
@@ -285,9 +291,24 @@ void controlpanel::set_parfilename(std::string str)
     parfilename = str;
 }
 
+void controlpanel::set_disfilename(std::string str)
+{
+    disfilename = str;
+}
+
 void controlpanel::set_parflag(int n)
 {
     parflag = n;
+}
+
+void controlpanel::set_disflag(int n)
+{
+    disflag = n;
+}
+
+void controlpanel::set_anaflag(int n)
+{
+    anaflag = n;
 }
 
 void controlpanel::set_pardelz(int n)
@@ -315,9 +336,24 @@ std::string controlpanel::get_parfilename()
     return parfilename;
 }
 
+std::string controlpanel::get_disfilename()
+{
+    return disfilename;
+}
+
 int controlpanel::get_parflag()
 {
     return parflag;
+}
+
+int controlpanel::get_disflag()
+{
+    return disflag;
+}
+
+int controlpanel::get_anaflag()
+{
+    return anaflag;
 }
 
 int controlpanel::get_pardelz()
@@ -476,13 +512,16 @@ void scanpanel::paramScan(std::map <std::string, std::string> &var,
             scancord1[idx] = vscan;
             updateVarlist(var, vscan, elecP, seedP, unduP, radiP);
 
-            FELNumerical tmpFELNum(seedP, unduP, elecP, radiP, cntlP);
-            tmpFELNum.generateDistribution(-3.1415926, 3.1415926);
-            tmpFELNum.initParams();
-            tmpFELNum.FELsolverSingleFrequency1D();
+            FELNumerical tmpFELNumins(seedP, unduP, elecP, radiP, cntlP);
+            tmpFELNumins.FELsimulation1D();
+            /*
+            tmpFELNumins.generateDistribution(-3.1415926, 3.1415926);
+            tmpFELNumins.initParams();
+            tmpFELNumins.FELsolverSingleFrequency1D();
+            */
 
-            //scancord2[idx] = tmpFELNum.get_maxExAmp();
-            scancord2[idx] = tmpFELNum.get_endExAmp();
+            //scancord2[idx] = tmpFELNumins.get_maxExAmp();
+            scancord2[idx] = tmpFELNumins.get_endExAmp();
             ++idx;
         }
     }

@@ -68,8 +68,11 @@ class defaultParams
             intMethods cpmethod;
             std::string cpoutfile;
             std::string cpparfile;
+            std::string cpdisfile;
             int cpparflag;
+            int cpdisflag;
             int cppardelz;
+            int cpanaflag;
 
             //!< scan panel
             bool spsflag, speflag;

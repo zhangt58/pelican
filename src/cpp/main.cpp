@@ -52,21 +52,24 @@ int main(int argc, char **argv)
     FELradiationParams.info();
     controlpanelParams.info();
 */
-/*
-    //!< do FEL analytical calculation
-    FELAnalysis FELAnalysisParams(undulatorParams, electronBeamParams, FELradiationParams);
-    double Lg1D  = FELAnalysisParams.get_FELgainlength1D();
-    double Lg3D  = FELAnalysisParams.get_FELgainlength3D();
-    double rho1D = FELAnalysisParams.get_FELparameter1D ();
-    double rho3D = FELAnalysisParams.get_FELparameter3D ();
-    double Psat  = FELAnalysisParams.get_FELsatpower    ();
 
-    cout << "Lg1D : " << Lg1D  << " m"  << endl;
-    cout << "Lg3D : " << Lg3D  << " m"  << endl;
-    cout << "rho1D: " << rho1D          << endl;
-    cout << "rho3D: " << rho3D          << endl;
-    cout << "Psat : " << Psat  << " GW" << endl;
-*/
+    
+    if (controlpanelParams.get_anaflag() == 1) //!< do FEL analytical calculation
+    {
+        FELAnalysis FELAnalysisParams(undulatorParams, electronBeamParams, FELradiationParams);
+        /*
+        double Lg1D  = FELAnalysisParams.get_FELgainlength1D();
+        double Lg3D  = FELAnalysisParams.get_FELgainlength3D();
+        double rho1D = FELAnalysisParams.get_FELparameter1D ();
+        double rho3D = FELAnalysisParams.get_FELparameter3D ();
+        double Psat  = FELAnalysisParams.get_FELsatpower    ();
+        cout << "Lg1D : " << Lg1D  << " m"  << endl;
+        cout << "Lg3D : " << Lg3D  << " m"  << endl;
+        cout << "rho1D: " << rho1D          << endl;
+        cout << "rho3D: " << rho3D          << endl;
+        cout << "Psat : " << Psat  << " GW" << endl;
+        */
+    }
 
 //    scanpanelParams.info();
     if (scanpanelParams.get_scanflag()) // do scan job
@@ -83,9 +86,7 @@ int main(int argc, char **argv)
     {
         //!< do FEL numerical simulation
         FELNumerical FELNumericalParams(seedfieldParams, undulatorParams, electronBeamParams, FELradiationParams, controlpanelParams);
-        FELNumericalParams.generateDistribution(-3.1415926, 3.1415926);
-        FELNumericalParams.initParams();
-        FELNumericalParams.FELsolverSingleFrequency1D();
+        FELNumericalParams.FELsimulation1D();
         FELNumericalParams.dumpResults();
     }
 

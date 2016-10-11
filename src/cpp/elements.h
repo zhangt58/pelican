@@ -113,8 +113,11 @@ class controlpanel : public defaultParams
         intMethods method;
         std::string outfilename;
         std::string parfilename;
+        std::string disfilename;
         int parflag;
         int pardelz;
+        int disflag;
+        int anaflag;
 
     public:
 
@@ -125,15 +128,21 @@ class controlpanel : public defaultParams
         void set_method(intMethods flag); //!< integration method
         void set_outfilename(std::string str); //!< outputfile name
         void set_parfilename(std::string str); //!< outputfile name for particle dist
-        void set_parflag(int n); //!< set flag, 1: dump, 0: not dump
+        void set_disfilename(std::string str); //!< file name for particle dist to read in
+        void set_parflag(int n); //!< set particle dump flag, 1: dump, 0: not dump, the file name is defined by parfilename
+        void set_disflag(int n); //!< set particle import flag, 1: import, 0: not, the file name is defined by disfilename
         void set_pardelz(int n); //!< dump particle dist every n periods
+        void set_anaflag(int n); //!< set FEL analysis calculation flag, 1: enable, 0: disable
 
         unsigned int get_npart();
         intMethods get_method();
         std::string get_outfilename();
         std::string get_parfilename();
+        std::string get_disfilename();
         int get_parflag();
+        int get_disflag();
         int get_pardelz();
+        int get_anaflag();
 
         void info();
 };

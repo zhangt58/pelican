@@ -10,9 +10,10 @@ LINKFLAGS = -lgsl -lgslcblas
 #-lm 
 CC = icpc
 EXEC = pelican
+OBJECTS=main.o readinput.o elements.o constants.o methods.o
 All: $(EXEC)
-$(EXEC): main.o readinput.o elements.o constants.o methods.o
-	$(CC) $(CXXFLAGS) main.o readinput.o elements.o constants.o methods.o -o $(EXEC) $(LINKFLAGS) 
+$(EXEC): $(OBJECTS)
+	$(CC) $(CXXFLAGS) $(OBJECTS) -o $(EXEC) $(LINKFLAGS) 
 main.o: main.cpp readinput.h elements.h methods.h
 	$(CC) $(CXXFLAGS) -c main.cpp -o main.o
 readinput.o: readinput.cpp readinput.h

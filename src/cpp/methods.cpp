@@ -19,6 +19,7 @@ FELAnalysis::FELAnalysis(undulator &unduP, electronBeam &elecP, FELradiation &ra
     current = elecP.get_peakCurrent  ();
     lambdas = radiP.get_wavelength   ();
 
+    double b, JJ, etad, etae, etag, CapG;
     sigmax = sqrt(avgbeta*emitn/gamma0);
     au = sqrt(lambdas*2*gamma0*gamma0/lambdau-1);
     //au     = 0.934*bfield*lambdau*100/sqrt(2.0);
@@ -39,6 +40,12 @@ FELAnalysis::FELAnalysis(undulator &unduP, electronBeam &elecP, FELradiation &ra
     Lg3D  = Lg1D*(1+CapG);
     rho3D = lambdau/4/PI/sqrt(3)/Lg3D;
     Psat  = 1.6*rho1D*Lg1D*Lg1D/(Lg3D*Lg3D)*gamma0*0.511*current/1000.0; // GW
+
+    std::cout << "Lg1D : " << Lg1D  << " m"  << std::endl;
+    std::cout << "Lg3D : " << Lg3D  << " m"  << std::endl;
+    std::cout << "rho1D: " << rho1D          << std::endl;
+    std::cout << "rho3D: " << rho3D          << std::endl;
+    std::cout << "Psat : " << Psat  << " GW" << std::endl;
 }
 
 FELAnalysis::~FELAnalysis()
@@ -90,6 +97,8 @@ FELNumerical::FELNumerical(seedfield &seedP, undulator &unduP, electronBeam &ele
     parfile = contP.get_parfilename  ();
     parflag = contP.get_parflag      ();
     pardelz = contP.get_pardelz      ();
+    disflag = contP.get_disflag      ();
+    disfile = contP.get_disfilename  ();
 }
 
 FELNumerical::~FELNumerical()
@@ -261,6 +270,17 @@ void FELNumerical::FELsolverSingleFrequency1D()
     }
 }
 
+void FELNumerical::FELsimulation1D()
+{
+    if (disflag)
+        importDisfile();
+    else
+    {
+        generateDistribution(-PI,PI);
+    }
+    initParams();
+    FELsolverSingleFrequency1D();
+}
 
 inline double FELNumerical::odef1(double psi1, double Exr, double Exi, double j1r, double j1i, unsigned int &idx)
 {
@@ -311,6 +331,27 @@ void FELNumerical::dumpParfile()
     else
     {
         std::cout << parfile << " write ERROR!" << std::endl;
+        exit(1);
+    }
+}
+
+void FELNumerical::importDisfile()
+{
+    std::ifstream sdisin;
+    sdisin.open(disfile.c_str(), std::ifstream::in);
+    if (sdisin.good())
+    {
+        psi = new double [npart];
+        gam = new double [npart];
+        for (unsigned int i = 0; i < npart; i++)
+        {
+            sdisin >> psi[i] >> gam[i];
+        }
+        sdisin.close();
+    }
+    else
+    {
+        std::cout << disfile << " read ERROR!" << std::endl;
         exit(1);
     }
 }
