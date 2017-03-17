@@ -32,11 +32,11 @@ clean:
 
 install: pelican
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	mkdir -p $(DESTDIR)$(PREFIX)/pelican_m
+	mkdir -p $(DESTDIR)$(PREFIX)/share/pelican_m
 	cp $< $(DESTDIR)$(PREFIX)/bin
-	cp pelican.m $(DESTDIR)$(PREFIX)/pelican_m
-	cp pelicanT.m $(DESTDIR)$(PREFIX)/pelican_m
+	cp pelican.m $(DESTDIR)$(PREFIX)/share/pelican_m/pelican.m
+	cp pelicanT.m $(DESTDIR)$(PREFIX)/share/pelican_m/pelicanT.m
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/pelican
-	rm -f $(DESTDIR)$(PREFIX)/pelican_m
+	rm -f $(DESTDIR)$(PREFIX)/share/pelican_m
