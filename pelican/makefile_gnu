@@ -6,7 +6,8 @@ DEBUGFLAGS =
 COMMONFLAGS = 
 #-ansi -Wfatal-errors -Wall -Wconversion
 CXXFLAGS = $(COMMONFLAGS) $(DEBUGFLAGS) $(OPTFLAGS) $(PGFLAGS)
-LINKFLAGS = -static -lgsl -lgslcblas -lpthread
+LINKFLAGS = -lgsl -lgslcblas
+#-static 
 CC = g++
 EXEC = pelican
 All: $(EXEC)
