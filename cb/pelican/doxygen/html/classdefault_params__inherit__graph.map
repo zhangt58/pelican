@@ -1,0 +1,8 @@
+<map id="defaultParams" name="defaultParams">
+<area shape="rect" id="node2" href="$classcontrolpanel.html" title="{controlpanel\n||+ controlpanel()\l+ controlpanel()\l+ set_npart()\l+ get_npart()\l+ info()\l}" alt="" coords="5,220,116,356"/>
+<area shape="rect" id="node3" href="$classelectron_beam.html" title="{electronBeam\n||+ electronBeam()\l+ electronBeam()\l+ set_centralEnergy()\l+ set_energySpread()\l+ set_emitnx()\l+ set_emitny()\l+ set_peakCurrent()\l+ set_avgBetaFunc()\l+ get_centralEnergy()\l+ get_energySpread()\l+ get_emitnx()\l+ get_emitny()\l+ get_peakCurrent()\l+ get_avgBetaFunc()\l+ info()\l}" alt="" coords="141,147,288,429"/>
+<area shape="rect" id="node4" href="$class_f_e_lradiation.html" title="{FELradiation\n||+ FELradiation()\l+ FELradiation()\l+ set_wavelength()\l+ get_wavelength()\l+ info()\l}" alt="" coords="312,220,445,356"/>
+<area shape="rect" id="node5" href="$classscanpanel.html" title="ELEMENTS_H_. " alt="" coords="470,154,644,422"/>
+<area shape="rect" id="node6" href="$classseedfield.html" title="define element classes. " alt="" coords="669,205,763,371"/>
+<area shape="rect" id="node7" href="$classundulator.html" title="{undulator\n||+ undulator()\l+ undulator()\l+ set_period()\l+ set_field()\l+ set_num()\l+ set_nstep()\l+ get_field()\l+ get_period()\l+ get_num()\l+ get_nstep()\l+ info()\l}" alt="" coords="787,176,889,400"/>
+</map>

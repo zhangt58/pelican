@@ -1,0 +1,3 @@
+<map id="scanpanel::checkScanSetupIsOK" name="scanpanel::checkScanSetupIsOK">
+<area shape="rect" id="node2" href="$classscanpanel.html#af24e52f96205d0d15988bb13ba8427ff" title="check if scan parameter (string) setup is OK, return 1 if is OK, or 0; " alt="" coords="273,5,495,32"/>
+</map>
