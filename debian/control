@@ -1,0 +1,21 @@
+Source: pelican
+Section: science
+Priority: optional
+Maintainer: Tong Zhang <zhangt@frib.msu.edu>
+Build-Depends: debhelper (>=9), libgsl-dev, g++
+Standards-Version: 3.9.6
+Homepage: https://archman.github.io/pelican/
+Vcs-Git: https://github.com/archman/pelican.git
+Vcs-Browser: https://github.com/archman/pelican.git
+
+Package: pelican
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Free-electron laser solver
+ Solve free-electron laser coupling equations, assuming constant
+ envelope, could fulfill the following objectives:
+ 1. Calculate analytical FEL equations;
+ 2. Simulate FEL process in undulators, get power gaincurve, as
+    well as bunching factor evolution;
+ 3. Particle distribution evolution;
+ 4. Scan input parameters, e.g. beam energy, emittance, etc.
