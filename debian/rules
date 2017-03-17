@@ -25,3 +25,7 @@ export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
 override_dh_auto_test:
 	#
+
+override_dh_auto_build:
+	cd pelican; \
+		make -f makefile_gnu
