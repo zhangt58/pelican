@@ -10,6 +10,7 @@ LINKFLAGS = -lgsl -lgslcblas
 #-static 
 CC = g++
 EXEC = pelican
+PREFIX=/usr/local
 All: $(EXEC)
 $(EXEC): main.o readinput.o elements.o constants.o methods.o
 	$(CC) $(CXXFLAGS) main.o readinput.o elements.o constants.o methods.o -o $(EXEC) $(LINKFLAGS) 
