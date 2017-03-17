@@ -1,8 +1,0 @@
-<map id="scanpanel::set_electronBeam" name="scanpanel::set_electronBeam">
-<area shape="rect" id="node2" href="$classelectron_beam.html#a787d3e61816281618f284ef3bb2e1ebb" title="beam energy, $$ " alt="" coords="267,5,442,46"/>
-<area shape="rect" id="node3" href="$classelectron_beam.html#a7e4cff020876ed5b43499b60ad1822cd" title="rms energy spread, $$ " alt="" coords="267,70,442,111"/>
-<area shape="rect" id="node4" href="$classelectron_beam.html#a9e750f50d228ef648b6b607afac44c77" title="normalized emittance in x " alt="" coords="267,136,442,163"/>
-<area shape="rect" id="node5" href="$classelectron_beam.html#aacb24d39f88c45a62e5fbd5516e43bfb" title="normalized emittance in y " alt="" coords="267,187,442,213"/>
-<area shape="rect" id="node6" href="$classelectron_beam.html#a1e6b08af9247eca49c00af3d3c57cd6f" title="peak current, [A] " alt="" coords="251,237,458,264"/>
-<area shape="rect" id="node7" href="$classelectron_beam.html#a3c9af6b4b9f079eb078200ac4c91812f" title="average beta function, [m] " alt="" coords="249,288,461,315"/>
-</map>

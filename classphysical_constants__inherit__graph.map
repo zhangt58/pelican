@@ -1,4 +1,0 @@
-<map id="physicalConstants" name="physicalConstants">
-<area shape="rect" id="node2" href="$class_f_e_l_analysis.html" title="define classes/functions to handle FEL physics related problems. " alt="" coords="5,277,171,443"/>
-<area shape="rect" id="node3" href="$class_f_e_l_numerical.html" title="{FELNumerical\n||+ FELNumerical()\l+ ~FELNumerical()\l+ get_npart()\l+ get_psi()\l+ get_gam()\l+ get_maxExAmp()\l+ get_maxEyAmp()\l+ get_endExAmp()\l+ get_endEyAmp()\l+ generateDistribution()\land 8 more...\l}" alt="" coords="195,248,353,472"/>
-</map>

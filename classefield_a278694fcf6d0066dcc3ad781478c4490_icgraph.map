@@ -1,7 +1,0 @@
-<map id="efield::get_amplitude" name="efield::get_amplitude">
-<area shape="rect" id="node2" href="$classseedfield.html#a19313d51bf26babc5903fc8a4cfa8750" title="show all parameters " alt="" coords="247,5,350,32"/>
-<area shape="rect" id="node3" href="$class_f_e_l_numerical.html#a6f826e9f11871164430bfe54175e8c11" title="get the last record of Ex amplitude " alt="" coords="197,56,400,83"/>
-<area shape="rect" id="node6" href="$class_f_e_l_numerical.html#a240603c060d6eadae8b1d3b172f75cf8" title="get the last record of Ey amplitude " alt="" coords="197,107,400,133"/>
-<area shape="rect" id="node4" href="$classscanpanel.html#ad5d03fff058d2903c654c55f101ae852" title="do parameters scan " alt="" coords="448,56,603,83"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="651,56,701,83"/>
-</map>
