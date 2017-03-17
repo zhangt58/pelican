@@ -1,0 +1,5 @@
+<map id="scanpanel::checkScanParamIsOK" name="scanpanel::checkScanParamIsOK">
+<area shape="rect" id="node2" href="$classscanpanel.html#abcd398fda4ec23590821fb7fa391f8eb" title="check scan setup, return 1 if all the parameters are OK, or 0 and exit(1); " alt="" coords="277,5,496,32"/>
+<area shape="rect" id="node3" href="$classscanpanel.html#ad5d03fff058d2903c654c55f101ae852" title="do parameters scan " alt="" coords="544,5,699,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="747,5,797,32"/>
+</map>

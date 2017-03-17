@@ -1,0 +1,22 @@
+<map id="FELNumerical::FELNumerical" name="FELNumerical::FELNumerical">
+<area shape="rect" id="node2" href="$classseedfield.html#a37be3b602da3dd62d1613bc4245b8c0c" title="seedfield::get_Ex" alt="" coords="296,5,419,32"/>
+<area shape="rect" id="node3" href="$classseedfield.html#ad910b052e3121815789098ed505527fc" title="seedfield::get_Ey" alt="" coords="296,56,419,83"/>
+<area shape="rect" id="node4" href="$classelectron_beam.html#afe29e0f5432af0a901d1040750d9e30a" title="electronBeam::get_central\lEnergy" alt="" coords="270,107,445,149"/>
+<area shape="rect" id="node5" href="$classelectron_beam.html#a9bd9fc55effd4ed222652cfd9e9123c1" title="electronBeam::get_energy\lSpread" alt="" coords="270,173,445,214"/>
+<area shape="rect" id="node6" href="$classelectron_beam.html#a1ea62fb4f103eece7f7f0226a18a6d33" title="electronBeam::get_emitnx" alt="" coords="270,239,445,265"/>
+<area shape="rect" id="node7" href="$classelectron_beam.html#aae0c806c3fc1fcd56296a7e3d11cb0e1" title="electronBeam::get_avgBetaFunc" alt="" coords="251,289,463,316"/>
+<area shape="rect" id="node8" href="$classundulator.html#a717066050ec371b8bb7704168cd118b6" title="undulator::get_period" alt="" coords="286,340,429,367"/>
+<area shape="rect" id="node9" href="$classundulator.html#a9cdaa82744819744efb5eaa12ed28b92" title="undulator::get_field" alt="" coords="291,391,423,417"/>
+<area shape="rect" id="node10" href="$classundulator.html#ac85551d58515bffeee330d5557ee0032" title="undulator::get_deltz" alt="" coords="289,441,425,468"/>
+<area shape="rect" id="node11" href="$classundulator.html#aaa0c6986ca659e596400dcd41f5c871f" title="undulator::get_num" alt="" coords="291,492,424,519"/>
+<area shape="rect" id="node12" href="$classelectron_beam.html#a7ece1e5a5fd4ca224a6b1104f14b3c8f" title="electronBeam::get_peakCurrent" alt="" coords="254,543,461,569"/>
+<area shape="rect" id="node13" href="$class_f_e_lradiation.html#a5be822c35edae96fc72449a6b8a34852" title="FELradiation::get_wavelength" alt="" coords="260,593,455,620"/>
+<area shape="rect" id="node14" href="$classcontrolpanel.html#a9dd767a92ae72829a03eaf39129deca1" title="controlpanel::get_npart" alt="" coords="280,644,435,671"/>
+<area shape="rect" id="node15" href="$classcontrolpanel.html#a9c939cf2a8ddaccfd5e74b4aa8d8ca6f" title="controlpanel::get_method" alt="" coords="273,695,441,721"/>
+<area shape="rect" id="node16" href="$classcontrolpanel.html#a04179eeb56ee6c5a0ac60cc29fa1fa39" title="controlpanel::get_outfilename" alt="" coords="261,745,453,772"/>
+<area shape="rect" id="node17" href="$classcontrolpanel.html#ac853ba04fdbf5065eb764ff6c3ffa273" title="controlpanel::get_parfilename" alt="" coords="261,796,453,823"/>
+<area shape="rect" id="node18" href="$classcontrolpanel.html#a2cf91a2b1b110750d709c9f4d88b60f7" title="controlpanel::get_parflag" alt="" coords="275,847,439,873"/>
+<area shape="rect" id="node19" href="$classcontrolpanel.html#ae84ac30b604ac0555548ef6c01b75335" title="controlpanel::get_pardelz" alt="" coords="274,897,441,924"/>
+<area shape="rect" id="node20" href="$classcontrolpanel.html#ac5e75f460c7ca307ea56430887aac20b" title="controlpanel::get_disflag" alt="" coords="276,948,439,975"/>
+<area shape="rect" id="node21" href="$classcontrolpanel.html#aa9ca1d979ee6e17885fc3382b86e465f" title="controlpanel::get_disfilename" alt="" coords="262,999,453,1025"/>
+</map>
