@@ -3,7 +3,7 @@ PGFLAGS =
 #-pg
 DEBUGFLAGS = 
 #-g
-COMMONFLAGS = 
+COMMONFLAGS = -fPIE -pie -Wformat -Wformat-security -Werror=format-security
 #-ansi -Wfatal-errors -Wall -Wconversion
 CXXFLAGS = $(COMMONFLAGS) $(DEBUGFLAGS) $(OPTFLAGS) $(PGFLAGS)
 LINKFLAGS = -lgsl -lgslcblas
