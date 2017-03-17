@@ -1,2 +1,3 @@
 pelican binary: new-package-should-close-itp-bug
 pelican binary: binary-without-manpage
+pelican binary: hardening-no-bindnow
