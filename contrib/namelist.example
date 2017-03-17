@@ -1,0 +1,49 @@
+## input parameters example
+
+# input seed field, [V/m], prefix: seed
+seedEx = "5e5,0"
+seedEy = "0,0"
+
+# undulator, prefix: undulator
+undulatorField  = 0.42548
+undulatorPeriod = 0.025     # [m]
+undulatorDeltz  = 1         # [period]
+undulatorNum    = 500
+
+# electron beam, prefix: electron
+electronAvgBetaFunc   = 6       # [m]
+electronCentralEnergy = 264.9   
+electronEnergySpread  = 265e-4 
+electronEmitnx        = 4e-6    # [mm.mrad]
+electronEmitny        = 4e-6    # [mm.mrad]
+electronPeakCurrent   = 300     # [A]
+
+# FEL radiation, prefix: FEL
+FELwavelength = 265.85e-9       # [m]
+
+# control panel, prefix: cp
+cpnpart   = 17600
+cpmethod = "RK4"
+#cpmethod = "EU2"
+#cpmethod = "EU1"
+cpoutfile = "pelican.out"
+
+cpparflag = 0 # dump particle dist flag, 1: enable, or 0
+cppardelz = 0 # dump every cpppardelz periods, 0: only dump last record
+cpparfile = "pelican.par"
+
+cpdisflag = 1 # read particle dist flag, 1: enable, or 0
+cpdisfile = "pelican.dis"
+
+cpanaflag = 1 # print analytical results
+
+# scan panel, prefix: sp
+spsflag   = 0
+speflag   = 1
+spobjfunc = "power"
+spparam   = "electronCentralEnergy"
+spvbegin  = 260
+spvend    = 270
+spvstep   = 1
+spoutfile = "pelican.scn"
+
