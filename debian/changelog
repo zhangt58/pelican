@@ -1,5 +1,7 @@
 pelican (0.1.0-1) unstable; urgency=medium
 
+  * pelican C++ executable
+  * pelican.m and pelicanT.m for MATLAb/OCTAVE
   * Initial release
 
  -- Tong Zhang <zhangt@frib.msu.edu>  Fri, 17 Mar 2017 10:42:51 -0400
