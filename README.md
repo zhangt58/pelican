@@ -21,3 +21,4 @@ MATLAB versions are provided.
   then in MATLAB, new functions: ``pelican`` and ``pelicanT`` are ready to use.
 * In Linux terminal, command ``pelican`` is ready to use.
 * Examples see [HERE for MATLAB](legacy/example) and [HRER for C++ binary](contrib).
+* For C++ version, the documentation is hosted [HERE](https://archman.github.io/pelican/).
