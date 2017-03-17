@@ -24,7 +24,14 @@ constants.o: constants.cpp constants.h
 methods.o: methods.cpp methods.h constants.h elements.h
 	$(CC) $(CXXFLAGS) -c methods.cpp -o methods.o
 
-.PHONY: clean
+.PHONY: clean install uninstall
 clean:
 	#-rm elements.o readinput.o main.o methods.o constans.o 2> /dev/null
 	rm *.o
+
+install: pelican
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp $< $(DESTDIR)$(PREFIX)/bin/pelican
+
+uninstall:
+	rm -f $(DESTDIR)$(PREFIX)/bin/pelican
