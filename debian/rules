@@ -5,7 +5,7 @@
 
 
 # see FEATURE AREAS in dpkg-buildflags(1)
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 # see ENVIRONMENT in dpkg-buildflags(1)
 # package maintainers to append CFLAGS
@@ -32,4 +32,4 @@ override_dh_auto_build:
 
 override_dh_auto_install:
 	cd pelican; \
-		make install -f makefile_gnu
+		make install DESTDIR=../debian/pelican PREFIX=/usr -f makefile_gnu
