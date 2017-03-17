@@ -28,4 +28,8 @@ override_dh_auto_test:
 
 override_dh_auto_build:
 	cd pelican; \
-		make -f makefile_gnu
+		make pelican -f makefile_gnu
+
+override_dh_auto_install:
+	cd pelican; \
+		make install -f makefile_gnu
