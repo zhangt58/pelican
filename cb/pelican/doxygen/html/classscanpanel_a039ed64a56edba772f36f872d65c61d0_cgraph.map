@@ -1,6 +1,0 @@
-<map id="scanpanel::set_undulator" name="scanpanel::set_undulator">
-<area shape="rect" id="node2" href="$classundulator.html#a7a27a3ad42f9d826929d68e04105c7f1" title="peak magnetic field, [T] " alt="" coords="227,5,359,32"/>
-<area shape="rect" id="node3" href="$classundulator.html#a9e87429b74fd3e518da8b64ba7f5dc3e" title="period length, [m] " alt="" coords="222,56,365,83"/>
-<area shape="rect" id="node4" href="$classundulator.html#ac2a1d4ec90aa751762c3e8cb6b99e439" title="integration steps per period " alt="" coords="223,107,363,133"/>
-<area shape="rect" id="node5" href="$classundulator.html#ab7da54eee638d6b1fbe9fba7abf68310" title="total period number " alt="" coords="227,157,360,184"/>
-</map>
